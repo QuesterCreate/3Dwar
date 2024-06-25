@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Hey there isnt everything OK
 public class VehicleEnterExit : MonoBehaviour
 {
     public string playerTag;
