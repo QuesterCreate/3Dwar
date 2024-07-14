@@ -4,5 +4,23 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 15999ffde0de96648b890e135a21241e
+  - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: b88e8c5f487f5dd40a37dca54d70c70e
+  - enabled: 1
+    path: Assets/Scenes/MissonShoot.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/MissonCar.unity
+    guid: 2213ffbfa7f26254f8c629762690aaaa
+  - enabled: 1
+    path: Assets/Scenes/MissonCollect.unity
+    guid: eab387ef3f0ae66418672b47c2129a34
+  - enabled: 1
+    path: Assets/Scenes/SettingsMenu.unity
+    guid: c23363091e2f7734ab8a3de59bd9df25
   m_configObjects: {}

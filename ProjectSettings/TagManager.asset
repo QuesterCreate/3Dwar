@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - NPC
+  - NPC1
+  - NPC2
+  - NPC3
+  - NPC4
+  - NPC5
+  - XNPC
   layers:
   - Default
   - TransparentFX
@@ -38,6 +45,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: GangsterImage
+    uniqueID: 951427629
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: top
+    uniqueID: 918503053
     locked: 0

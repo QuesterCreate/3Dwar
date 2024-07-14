@@ -6,28 +6,31 @@ public class CameraController : MonoBehaviour
 {
     //Variables
 
-    [SerializeField]private float mouseSensitivity;
+    [SerializeField] private float mouseSensitivity;
 
-//References
-private Transform parent;
+    //References
+    private Transform parent;
 
-private void Start(){
+    private void Start()
+    {
 
-parent=transform.parent;
+        parent = transform.parent;
 
 
-}
+    }
 
-private void Update(){
+    private void Update()
+    {
 
-Rotate();
-}
+        Rotate();
+    }
 
-private void Rotate(){
-float mouseX= Input.GetAxis("Mouse X") *mouseSensitivity*Time.deltaTime;
-parent.Rotate(Vector3.up,mouseX);
+    private void Rotate()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        parent.Rotate(Vector3.up, mouseX);
 
-}
+    }
 
 
 }

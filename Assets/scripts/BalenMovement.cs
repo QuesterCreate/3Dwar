@@ -27,7 +27,7 @@ public class BalenMovement : MonoBehaviour
 
     private void Start()
     {
-
+        
         controller = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
 

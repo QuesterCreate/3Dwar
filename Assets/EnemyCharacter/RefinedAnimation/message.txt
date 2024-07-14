@@ -1,0 +1,143 @@
+using System.Collections.Generic;
+using ExitGames.Client.Photon;
+using NaughtyAttributes;
+using Photon.Realtime;
+using UnityEngine;
+
+namespace Photon.Pun.Demo.Asteroids
+{
+    public class LobbyHandler : MonoBehaviourPunCallbacks
+    {
+        [SerializeField] private string nickName;
+        [SerializeField] private string roomName;
+        [SerializeField] private string carName;
+        //[SerializeField] private RoomLister roomLister;
+        //[SerializeField] private RoomPlayerLister playerLister;
+        
+        private void Start()
+        {
+            PhotonNetwork.AutomaticallySyncScene = true;
+        }
+        
+        [Button]
+        public void SelectCar()
+        {
+            Hashtable properties = PhotonNetwork.LocalPlayer.CustomProperties ?? new Hashtable();
+            if (!properties.TryAdd("CarName", carName))
+            {
+                properties["CarName"] = carName;
+            }
+            PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+        }
+
+        [Button]
+        public void Login()
+        {
+            PhotonNetwork.NickName = nickName;
+            PhotonNetwork.ConnectUsingSettings();
+        }
+
+        [Button]
+        public void JoinRoom()
+        {
+            PhotonNetwork.JoinRoom(roomName);
+        }
+
+        [Button]
+        public void CreateRoom()
+        {
+            PhotonNetwork.CreateRoom(roomName, new RoomOptions {MaxPlayers = 8}, TypedLobby.Default);
+        }
+        
+        #region Connection Callbacks
+
+        public override void OnConnectedToMaster()
+        {
+            Debug.Log("connected to master");
+            PhotonNetwork.JoinLobby();
+        }
+
+        public override void OnDisconnected(DisconnectCause cause)
+        {
+            Debug.Log($"disconnected because of {cause}");
+        }
+
+        #endregion
+        
+        #region Lobby Callbacks
+
+        public override void OnJoinedLobby()
+        {
+            Debug.Log("joined lobby");
+        }
+
+        public override void OnLeftLobby()
+        {
+            Debug.Log("left lobby");
+        }
+
+        #endregion
+
+        #region Room Callbacks
+        
+        public override void OnCreatedRoom()
+        {
+            base.OnCreatedRoom();
+            Debug.Log("created room");
+        }
+        public override void OnJoinedRoom()
+        {
+            base.OnJoinedRoom();
+            foreach (var player in PhotonNetwork.PlayerList)
+            {
+                Debug.Log($"player in the room is {player.NickName}");
+            }
+        }
+        public override void OnRoomListUpdate(List<RoomInfo> roomList)
+        {
+            base.OnRoomListUpdate(roomList);
+            Debug.Log("room list update");
+            //roomLister.UpdateRoom(roomList);
+        }
+        public override void OnCreateRoomFailed(short returnCode, string message)
+        {
+            Debug.Log("failed to create room");
+        }
+        public override void OnJoinRoomFailed(short returnCode, string message)
+        {
+            Debug.Log("failed to join room");
+        }
+        public override void OnJoinRandomFailed(short returnCode, string message)
+        {
+            Debug.Log("failed to join random room");
+        }
+        #endregion
+
+        #region Player Callbacks
+
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            Debug.Log($"player entered room {newPlayer.NickName}");
+            //playerLister.UpdatePlayersList(PhotonNetwork.CurrentRoom.Name,PhotonNetwork.PlayerList.ToList());
+        }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {                   
+            Debug.Log($"player left room {otherPlayer.NickName}");
+            //playerLister.UpdatePlayersList(PhotonNetwork.CurrentRoom.Name,PhotonNetwork.PlayerList.ToList());
+        }
+
+        public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+        {
+            Debug.Log("player property changed");
+            //playerLister.UpdatePlayersList(PhotonNetwork.CurrentRoom.Name,PhotonNetwork.PlayerList.ToList());
+        }
+
+        #endregion
+
+      
+
+        
+        
+    }
+}
